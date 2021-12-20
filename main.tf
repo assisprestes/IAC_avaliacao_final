@@ -1,15 +1,11 @@
-module "ec2_instance" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 3.0"
+module "asg" {
+  source = "./modules/"
 
-  name = "ec2-regitry-module-instance"
+  aws-profile = "default"
+  aws-region  = "us-east-1"
 
-  ami                    = "ami-0ed9277fb7eb570c9"
-  instance_type          = "t2.micro"
-  subnet_id              = "subnet-09d05c72904c4c179"
-
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
+  instance-ami     = "ami-0ed9277fb7eb570c9"  
+  asg-min-size     = "2"                      # number of machines
+  asg-max-size     = "4"
+  asg-def-size     = "2"
 }
